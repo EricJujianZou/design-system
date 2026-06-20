@@ -37,8 +37,8 @@
         "`npm run lint`, `npm run typecheck`, `npm test`, and `npm run build` all stay green."
       ],
       "skill_match": null,
-      "passes": false,
-      "status": "in_progress"
+      "passes": true,
+      "status": "done"
     }
   ]
 }
