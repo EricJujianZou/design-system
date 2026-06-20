@@ -4,3 +4,7 @@ coverage/
 *.log
 .DS_Store
 .vitest/
+
+# Harness (adw) runtime artifacts — per-run, never durable
+state.json
+observability/runs/
