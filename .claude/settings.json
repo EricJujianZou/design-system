@@ -1,0 +1,46 @@
+{
+  "_comment": "Cross-repo hook wiring: this target borrows the agentic-sdlc engine's hooks by ABSOLUTE path, with `uv --project` pointed at the engine so the `adw` package imports. Mirrors the engine's matchers (plans/design-system-bootstrap.md Phase 0). Update the engine path if the engine checkout moves.",
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash|PowerShell",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "uv run --quiet --project \"C:/Users/zouju/Coding Projects/agentic-sdlc\" python \"C:/Users/zouju/Coding Projects/agentic-sdlc/hooks/pretooluse_guard.py\""
+          }
+        ]
+      },
+      {
+        "matcher": "Edit|Write|NotebookEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "uv run --quiet --project \"C:/Users/zouju/Coding Projects/agentic-sdlc\" python \"C:/Users/zouju/Coding Projects/agentic-sdlc/hooks/pretooluse_guard.py\""
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write|NotebookEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "uv run --quiet --project \"C:/Users/zouju/Coding Projects/agentic-sdlc\" python \"C:/Users/zouju/Coding Projects/agentic-sdlc/hooks/posttooluse_autocommit.py\""
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "uv run --quiet --project \"C:/Users/zouju/Coding Projects/agentic-sdlc\" python \"C:/Users/zouju/Coding Projects/agentic-sdlc/hooks/stop_checklist.py\""
+          }
+        ]
+      }
+    ]
+  }
+}
