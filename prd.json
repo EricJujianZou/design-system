@@ -29,7 +29,13 @@
       "priority": 5,
       "title": "GH-1: Input primitive",
       "description": "Add an `Input` text-field primitive to the design system, styled per `DESIGN.md` (white bg, 1px hairline border, `rounded-control`, ~12x14 padding; focus -> accent ring + accent border; placeholder = text-secondary; supports `disabled`).\n\n**Pattern to follow:** copy the `Button` reference primitive (`src/components/button.tsx`): a `cva` variant map + `forwardRef` + `cn(buttonVariants(...), className)` so callers can extend. Style strictly from the `DESIGN.md` tokens exposed by `tailwind-preset.cjs` (`bg-accent`, `text-default`, `border-hairline`, `rounded-control`, `rounded-card`, `font-sans`, ...). Export it from `src/index.ts`.\n\n**Acceptance criteria**\n- [ ] `Input` is a `forwardRef<HTMLInputElement>` over the native `input`, spreads `...props`, and merges a caller `className` via `cn`.\n- [ ] Default styling matches DESIGN.md (hairline border, `rounded-control`, accent focus ring), using preset tokens only.\n- [ ] Exported from `src/index.ts` (component + `InputProps` type).\n- [ ] vitest + Testing Library test: renders, accepts typed value, honors `disabled`, merges a caller `className`.\n- [ ] `npm run lint`, `npm run typecheck`, `npm test`, `npm run build` all stay green.",
-      "acceptance_criteria": [],
+      "acceptance_criteria": [
+        "A new `src/components/input.tsx` exports `Input` as a `React.forwardRef<HTMLInputElement>` over the native `<input>` that spreads `...props` and merges a caller `className` via `cn(...)`, following the Button primitive shape.",
+        "Default Input styling uses only `tailwind-preset.cjs` tokens \u2014 `bg-canvas`, `border border-hairline`, `rounded-control`, `placeholder:text-secondary`, and an accent focus ring/border (`focus-visible:ring-accent` / `focus-visible:border-accent`) \u2014 with ~12x14 padding, and honors the native `disabled` attribute.",
+        "`Input` (the component) and its `InputProps` type are re-exported from `src/index.ts` alongside the existing Button exports.",
+        "A `src/components/input.test.tsx` vitest + Testing Library test asserts the Input renders, accepts a typed value, applies `disabled`, and merges a caller-supplied `className`.",
+        "`npm run lint`, `npm run typecheck`, `npm test`, and `npm run build` all stay green."
+      ],
       "skill_match": null,
       "passes": false,
       "status": "in_progress"
