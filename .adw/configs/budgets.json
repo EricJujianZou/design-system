@@ -1,0 +1,15 @@
+{
+  "_comment": "Per-repo budgets for design-system. Same limits as the engine default, except test_evidence_command: this is a React/TS/vitest repo, so the orchestrator's deterministic gate runs `npm test`, not pytest. Wrapped in `cmd /c` so the Windows npm.cmd shim resolves under subprocess (shell=False).",
+  "hourly_api_call_cap": 30,
+  "per_ticket_token_budget": 2000000,
+  "permission_denial_cap": 10,
+  "instant_failure_cap": 2,
+  "max_iterations_default": 5,
+  "circuit_cooldown_minutes": 30,
+  "usage_limit_cooldown_minutes": 300,
+  "stage_timeout_minutes": 15,
+  "test_evidence_command": ["cmd", "/c", "npm", "test"],
+  "test_evidence_timeout_minutes": 10,
+  "observer_enabled": true,
+  "max_parallel": 3
+}

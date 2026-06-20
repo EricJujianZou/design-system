@@ -1,4 +1,44 @@
 {
   "project": "design-system",
-  "stories": []
+  "stories": [
+    {
+      "id": "GH-3",
+      "type": "feat",
+      "priority": 5,
+      "title": "GH-3: Typography primitive",
+      "description": "Add a `Text` (or `Typography`) primitive that renders the DESIGN.md type scale (Display/H1/H2/H3/Body/Small/Caption) with the right size/line-height/weight/tracking, polymorphic via an `as` prop so a heading variant can render the correct element.\n\n**Pattern to follow:** copy the `Button` reference primitive (`src/components/button.tsx`): a `cva` variant map + `forwardRef` + `cn(buttonVariants(...), className)` so callers can extend. Style strictly from the `DESIGN.md` tokens exposed by `tailwind-preset.cjs` (`bg-accent`, `text-default`, `border-hairline`, `rounded-control`, `rounded-card`, `font-sans`, ...). Export it from `src/index.ts`.\n\n**Acceptance criteria**\n- [ ] A `cva` variant map encodes the DESIGN.md scale (Display 40/1.15 ... Caption 12/1.4) with weights 400/500/600 and heading tracking `-0.01em`.\n- [ ] Polymorphic `as` prop picks the element (e.g. `h1`/`p`/`span`); default sensible per variant; merges a caller `className` via `cn`.\n- [ ] Exported from `src/index.ts` with its prop types.\n- [ ] vitest + Testing Library test: each variant renders expected classes; `as` overrides the tag; merges a caller `className`.\n- [ ] `npm run lint`, `npm run typecheck`, `npm test`, `npm run build` all stay green.",
+      "acceptance_criteria": [],
+      "skill_match": null,
+      "passes": false,
+      "status": "open"
+    },
+    {
+      "id": "GH-2",
+      "type": "feat",
+      "priority": 5,
+      "title": "GH-2: Card primitive",
+      "description": "Add a `Card` surface primitive plus `CardHeader`/`CardContent`/`CardFooter` sub-parts, styled per `DESIGN.md` (white bg, 1px hairline border, `rounded-card`, padding 24, shadow-sm).\n\n**Pattern to follow:** copy the `Button` reference primitive (`src/components/button.tsx`): a `cva` variant map + `forwardRef` + `cn(buttonVariants(...), className)` so callers can extend. Style strictly from the `DESIGN.md` tokens exposed by `tailwind-preset.cjs` (`bg-accent`, `text-default`, `border-hairline`, `rounded-control`, `rounded-card`, `font-sans`, ...). Export it from `src/index.ts`.\n\n**Acceptance criteria**\n- [ ] `Card` and its sub-parts are `forwardRef<HTMLDivElement>` over `div`, spread `...props`, and merge a caller `className` via `cn`.\n- [ ] Default styling matches DESIGN.md (hairline border, `rounded-card`, `shadow-sm`, padding) using preset tokens only.\n- [ ] All parts exported from `src/index.ts` with their prop types.\n- [ ] vitest + Testing Library test: renders children, composes header/content/footer, merges a caller `className`.\n- [ ] `npm run lint`, `npm run typecheck`, `npm test`, `npm run build` all stay green.",
+      "acceptance_criteria": [],
+      "skill_match": null,
+      "passes": false,
+      "status": "open"
+    },
+    {
+      "id": "GH-1",
+      "type": "feat",
+      "priority": 5,
+      "title": "GH-1: Input primitive",
+      "description": "Add an `Input` text-field primitive to the design system, styled per `DESIGN.md` (white bg, 1px hairline border, `rounded-control`, ~12x14 padding; focus -> accent ring + accent border; placeholder = text-secondary; supports `disabled`).\n\n**Pattern to follow:** copy the `Button` reference primitive (`src/components/button.tsx`): a `cva` variant map + `forwardRef` + `cn(buttonVariants(...), className)` so callers can extend. Style strictly from the `DESIGN.md` tokens exposed by `tailwind-preset.cjs` (`bg-accent`, `text-default`, `border-hairline`, `rounded-control`, `rounded-card`, `font-sans`, ...). Export it from `src/index.ts`.\n\n**Acceptance criteria**\n- [ ] `Input` is a `forwardRef<HTMLInputElement>` over the native `input`, spreads `...props`, and merges a caller `className` via `cn`.\n- [ ] Default styling matches DESIGN.md (hairline border, `rounded-control`, accent focus ring), using preset tokens only.\n- [ ] Exported from `src/index.ts` (component + `InputProps` type).\n- [ ] vitest + Testing Library test: renders, accepts typed value, honors `disabled`, merges a caller `className`.\n- [ ] `npm run lint`, `npm run typecheck`, `npm test`, `npm run build` all stay green.",
+      "acceptance_criteria": [
+        "A new `src/components/input.tsx` exports `Input` as a `React.forwardRef<HTMLInputElement>` over the native `<input>` that spreads `...props` and merges a caller `className` via `cn(...)`, following the Button primitive shape.",
+        "Default Input styling uses only `tailwind-preset.cjs` tokens \u2014 `bg-canvas`, `border border-hairline`, `rounded-control`, `placeholder:text-secondary`, and an accent focus ring/border (`focus-visible:ring-accent` / `focus-visible:border-accent`) \u2014 with ~12x14 padding, and honors the native `disabled` attribute.",
+        "`Input` (the component) and its `InputProps` type are re-exported from `src/index.ts` alongside the existing Button exports.",
+        "A `src/components/input.test.tsx` vitest + Testing Library test asserts the Input renders, accepts a typed value, applies `disabled`, and merges a caller-supplied `className`.",
+        "`npm run lint`, `npm run typecheck`, `npm test`, and `npm run build` all stay green."
+      ],
+      "skill_match": null,
+      "passes": true,
+      "status": "done"
+    }
+  ]
 }
