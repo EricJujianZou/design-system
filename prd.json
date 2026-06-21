@@ -18,10 +18,16 @@
       "priority": 5,
       "title": "GH-2: Card primitive",
       "description": "Add a `Card` surface primitive plus `CardHeader`/`CardContent`/`CardFooter` sub-parts, styled per `DESIGN.md` (white bg, 1px hairline border, `rounded-card`, padding 24, shadow-sm).\n\n**Pattern to follow:** copy the `Button` reference primitive (`src/components/button.tsx`): a `cva` variant map + `forwardRef` + `cn(buttonVariants(...), className)` so callers can extend. Style strictly from the `DESIGN.md` tokens exposed by `tailwind-preset.cjs` (`bg-accent`, `text-default`, `border-hairline`, `rounded-control`, `rounded-card`, `font-sans`, ...). Export it from `src/index.ts`.\n\n**Acceptance criteria**\n- [ ] `Card` and its sub-parts are `forwardRef<HTMLDivElement>` over `div`, spread `...props`, and merge a caller `className` via `cn`.\n- [ ] Default styling matches DESIGN.md (hairline border, `rounded-card`, `shadow-sm`, padding) using preset tokens only.\n- [ ] All parts exported from `src/index.ts` with their prop types.\n- [ ] vitest + Testing Library test: renders children, composes header/content/footer, merges a caller `className`.\n- [ ] `npm run lint`, `npm run typecheck`, `npm test`, `npm run build` all stay green.",
-      "acceptance_criteria": [],
+      "acceptance_criteria": [
+        "A new `src/components/card.tsx` exports `Card`, `CardHeader`, `CardContent`, and `CardFooter`, each a `React.forwardRef<HTMLDivElement>` over a native `<div>` that spreads `...props` and merges a caller `className` via `cn(...)`, following the Button primitive shape.",
+        "Default `Card` styling uses only `tailwind-preset.cjs` tokens \u2014 `bg-canvas`, `border border-hairline`, `rounded-card`, `shadow-sm`, and padding 24 (`p-6`) \u2014 matching the DESIGN.md Card spec (white bg, 1px hairline border, radius 12, shadow sm).",
+        "`Card` and its sub-parts, along with their prop types, are re-exported from `src/index.ts` alongside the existing Button and Input exports.",
+        "A `src/components/card.test.tsx` vitest + Testing Library test asserts the Card renders its children, composes CardHeader/CardContent/CardFooter together, and merges a caller-supplied `className`.",
+        "`npm run lint`, `npm run typecheck`, `npm test`, and `npm run build` all stay green."
+      ],
       "skill_match": null,
-      "passes": false,
-      "status": "open"
+      "passes": true,
+      "status": "done"
     },
     {
       "id": "GH-1",
